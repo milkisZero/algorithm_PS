@@ -3,7 +3,6 @@ using namespace std;
 
 int arr[305];
 int dp[305][2];
-int preStep[305][2];
 
 int main() {
     ios::sync_with_stdio(0);
