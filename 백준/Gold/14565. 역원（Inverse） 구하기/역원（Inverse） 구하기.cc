@@ -5,9 +5,7 @@ using ll = long long;
 ll exgcd(ll a, ll b) {
     ll r1 = a, r2 = b;
     ll s1 = 1, s2 = 0;
-    ll t1 = 0, t2 = 1;
-
-    ll r, s, t, q;
+    ll r, s, q;
     while (r2) {
         q = r1 / r2;
 
@@ -16,11 +14,8 @@ ll exgcd(ll a, ll b) {
 
         s = s1 - q * s2;
         s1 = s2, s2 = s;
-
-        t = t1 - q * t2;
-        t1 = t2, t2 = t;
     }
-    r = r1, s = s1, t = t1;
+    r = r1, s = s1;
 
     if (r == 1)
         return s = s < 0 ? s + b : s;
