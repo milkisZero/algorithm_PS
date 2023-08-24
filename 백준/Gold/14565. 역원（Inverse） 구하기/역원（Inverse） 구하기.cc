@@ -17,7 +17,7 @@ ll exgcd(ll a, ll b) {
         s = s1 - q * s2;
         s1 = s2, s2 = s;
 
-        t = t1 - 1 * t2;
+        t = t1 - q * t2;
         t1 = t2, t2 = t;
     }
     r = r1, s = s1, t = t1;
