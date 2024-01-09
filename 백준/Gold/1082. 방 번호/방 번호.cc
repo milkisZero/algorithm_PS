@@ -14,26 +14,26 @@ int main() {
     int n, m;
     cin >> n;
 
-    vector<pair<int, int>> vec(n);
+    vector<int> vec(n);
     for (int i = 0; i < n; i++) {
-        vec[i].first = i;
-        cin >> vec[i].second;
+        cin >> vec[i];
     }
     cin >> m;
 
     vector<int> dp(m + 1);
     dp[0] = 0;
     int res[m + 1][10] = {0};
+
     for (int i = 0; i <= m; i++) {
         int maxi = 0;
         for (int j = 0; j < n; j++) {
             if (i == m && j == 0)
                 continue;
 
-            for (int p = 1; p * vec[j].second <= i; p++) {
-                int tmp = i - vec[j].second * p;
+            for (int p = 1; p * vec[j] <= i; p++) {
+                int tmp = i - vec[j] * p;
 
-                if (dp[i] < dp[tmp] + p) {
+                if (dp[i] <= dp[tmp] + p) {
                     dp[i] = dp[tmp] + p;
 
                     for (int k = 0; k < 10; k++) {
@@ -41,16 +41,6 @@ int main() {
                     }
                     res[i][j] += p;
                     maxi = j;
-                }
-                else if (dp[i] == dp[tmp] + p) {
-                    if (vec[maxi].first < vec[j].first) {
-
-                        for (int k = 0; k < 10; k++) {
-                            res[i][k] = res[tmp][k];
-                        }
-                        res[i][j] += p;
-                        maxi = j;
-                    }
                 }
             }
         }
