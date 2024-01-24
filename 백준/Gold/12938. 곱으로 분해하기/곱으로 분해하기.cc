@@ -11,7 +11,7 @@ using namespace std;
 using ll = long long;
 using pi = pair<int, int>;
 using pll = pair<ll, ll>;
-#define MOD 1000000009;
+#define MOD 1000000009
 
 map<ll, ll> m;
 
@@ -21,16 +21,14 @@ ll nHr(ll n, ll r) {
         return 1;
 
     ll fact = 1;
-    for (ll i = n - r + 1; i <= n; i++) {
+    for (ll i = n - r + 1; i <= n; i++)
         fact = (fact * i) % MOD;
-    }
 
     ll invFact = 1;
-    for (ll i = 1; i <= r; i++) {
+    for (ll i = 1; i <= r; i++)
         invFact = (invFact * i) % MOD;
-    }
 
-    ll powN = 1000000009 - 2;
+    ll powN = MOD - 2;
     while (powN) {
         if (powN % 2)
             fact = (fact * invFact) % MOD;
