@@ -14,8 +14,7 @@ int par[100005];
 int n, m;
 
 struct edge {
-    int a, b;
-    int cost;
+    int a, b, cost;
     bool operator<(const edge &o) const {
         return cost < o.cost;
     }
@@ -37,14 +36,10 @@ void uni(int a, int b) {
         par[find(b)] = find(a);
 }
 
-int cmp(edge a, edge b) {
-    return a.cost < b.cost;
-}
-
 int kruskal() {
     int ret = 0;
     init();
-    sort(_edges.begin(), _edges.end(), cmp);
+    sort(_edges.begin(), _edges.end());
     for (int i = 0; i < _edges.size(); i++) {
         edge e = _edges[i];
         if (find(e.a) != find(e.b)) {
