@@ -1,3 +1,4 @@
+// #위상정렬 #pq
 #include <iostream>
 #include <algorithm>
 #include <vector>
@@ -12,11 +13,27 @@ using ll = long long;
 using pi = pair<int, int>;
 using pll = pair<ll, ll>;
 
-map<string, vector<string>> m;
-map<string, int> ind;
-vector<string> res;
+int main() {
+    fastio;
 
-void topo() {
+    int n;
+    cin >> n;
+
+    map<string, vector<string>> m;
+    map<string, int> ind;
+    vector<string> res;
+
+    while (n--) {
+        string a, b;
+        cin >> a >> b;
+        m[a].push_back(b);
+        if (ind.find(a) == ind.end())
+            ind.insert({a, 0});
+        if (ind.find(b) == ind.end())
+            ind.insert({b, 0});
+        ind[b]++;
+    }
+
     priority_queue<string, vector<string>, greater<>> q;
     vector<string> v;
     for (auto iter = ind.begin(); iter != ind.end(); iter++) {
@@ -41,26 +58,6 @@ void topo() {
 
         res.push_back(cur);
     }
-}
-
-int main() {
-    fastio;
-
-    int n;
-    cin >> n;
-
-    while (n--) {
-        string a, b;
-        cin >> a >> b;
-        m[a].push_back(b);
-        if (ind.find(a) == ind.end())
-            ind.insert({a, 0});
-        if (ind.find(b) == ind.end())
-            ind.insert({b, 0});
-        ind[b]++;
-    }
-
-    topo();
 
     if (res.size() != ind.size())
         cout << -1;
