@@ -15,10 +15,10 @@ using pll = pair<ll, ll>;
 map<string, vector<string>> m;
 map<string, int> ind;
 vector<string> res;
-vector<string> v;
-priority_queue<string, vector<string>, greater<>> q;
 
 void topo() {
+    priority_queue<string, vector<string>, greater<>> q;
+    vector<string> v;
     for (auto iter = ind.begin(); iter != ind.end(); iter++) {
         if (iter->second == 0)
             q.push(iter->first);
