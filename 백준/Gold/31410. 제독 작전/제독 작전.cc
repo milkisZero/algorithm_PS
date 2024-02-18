@@ -36,14 +36,15 @@ int main() {
     }
 
     ll a = max(v[n].second + (n - 1) * (v[n].first - v[n - 1].first), v[1].second + 1 * (v[2].first - v[1].first) + pref[n] - pref[2]);
-    ll b = max(v[1].second + (n - 1) * (v[2].first - v[1].first), v[n].second + 1 * (v[n].first - v[n - 1].first) + pref2[n] - pref2[2]);
+    ll b = max(v[1].second + (n - 1) * (v[2].first - v[1].first), v[n].second + 1 * (v[n].first - v[n - 1].first + pref2[n] - pref2[2]));
     ll res = min(cnt1 - a, cnt2 - b);
 
-    for (int i = 2; i < n; i++) {
+     for (int i = 2; i < n; i++) {
         ll tmp = cnt1 - v[i].second - v[n].first + v[i].first;
         ll tmp2 = cnt2 - v[n + 1 - i].second - v[n + 1 - i].first + v[1].first;
         res = min(res, min(tmp, tmp2));
     }
+
 
     cout << res;
 
