@@ -53,9 +53,8 @@ int main() {
         }
     }
     cout << d[end] << '\n';
-
-    ll cnt = 0;
-    visited[end] = 1;
+    
+    set<pll> road;
     for (Q.push({d[end], end}); Q.size();) {
         ll u = Q.top().second;
         x = Q.top().first;
@@ -65,16 +64,15 @@ int main() {
             for (auto p : e2[u]) {
                 ll v = p.first;
                 if (x - p.second == d[v]) {
-                    cnt++;
-                    if (!visited[v]) {
+                    if (road.find({u, v}) == road.end()) {
                         Q.push({d[v], v});
-                        visited[v] = 1;
+                        road.insert({u, v});
                     }
                 }
             }
         }
     }
-    cout << cnt;
+    cout << road.size();
 
     return 0;
 }
