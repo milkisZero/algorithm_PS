@@ -30,7 +30,7 @@ int main() {
         m_mini = min(m_mini, (a - b));
     }
 
-    cout << max(abs(p_maxi - p_mini), abs(m_maxi - m_mini));
+    cout << max((p_maxi - p_mini), (m_maxi - m_mini));
 
     return 0;
 }
