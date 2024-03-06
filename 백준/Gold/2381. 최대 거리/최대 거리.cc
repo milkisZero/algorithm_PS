@@ -1,3 +1,4 @@
+// #수학 #애드혹
 #include <iostream>
 #include <algorithm>
 #include <vector>
@@ -11,35 +12,25 @@ using ll = long long;
 using pi = pair<int, int>;
 using pll = pair<ll, ll>;
 
-vector<pi> v;
-
-int cmp1(pi a, pi b) {
-    return (a.first - a.second) > (b.first - b.second);
-}
-
-int cmp2(pi a, pi b) {
-    return (a.first + a.second) > (b.first + b.second);
-}
-
 int main() {
     fastio;
 
     int n;
     cin >> n;
 
-    int a, b;
+    int p_maxi = -INF + 1, p_mini = INF;
+    int m_maxi = -INF + 1, m_mini = INF;
     for (int i = 0; i < n; i++) {
+        int a, b;
         cin >> a >> b;
-        v.push_back({a, b});
+
+        p_maxi = max(p_maxi, (a + b));
+        p_mini = min(p_mini, (a + b));
+        m_maxi = max(m_maxi, (a - b));
+        m_mini = min(m_mini, (a - b));
     }
 
-    sort(v.begin(), v.end(), cmp1);
-    int r1 = (v[0].first - v[0].second) - (v[n - 1].first - v[n - 1].second);
-
-    sort(v.begin(), v.end(), cmp2);
-    int r2 = (v[0].first + v[0].second) - (v[n - 1].first + v[n - 1].second);
-
-    cout << max(abs(r1), abs(r2));
+    cout << max(abs(p_maxi - p_mini), abs(m_maxi - m_mini));
 
     return 0;
 }
