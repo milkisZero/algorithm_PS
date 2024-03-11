@@ -49,8 +49,6 @@ int main() {
                         check[i] = i;
                 }
             }
-            if (check[sum / 2])
-                break;
         }
 
         if (check[sum / 2])
