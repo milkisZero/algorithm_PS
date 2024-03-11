@@ -19,10 +19,10 @@ int main() {
         ll n;
         cin >> n;
 
-        ll sum = 0;
+        ll sum = 0, a, b;
         pll coin[103];
+        ll check[50005] = {0};
         for (int i = 0; i < n; i++) {
-            ll a, b;
             cin >> a >> b;
             coin[i] = {a, b};
             sum += a * b;
@@ -33,22 +33,20 @@ int main() {
             continue;
         }
 
-        ll check[50005] = {0};
         for (int j = 0; j < n; j++) {
-            for (int i = sum / 2; i >= 0; i--) {
-                if (coin[j].first > i)
-                    break;
-                else if (check[i])
-                    continue;
-
-                for (int k = 1; k <= coin[j].second; k++) {
-                    ll tmp = coin[j].first * k;
-                    if (tmp > i)
-                        break;
-                    if (tmp + check[i - tmp] == i)
-                        check[i] = i;
+            auto [cost, cnt] = coin[j];
+            for (int i = sum / 2; i > cost; i--) {
+                if (!check[i]) {
+                    for (int k = 1; k <= cnt && cost * k < i; k++) {
+                        ll tmp = cost * k;
+                        check[tmp] = 1;
+                        if (check[i - tmp])
+                            check[i] = 1;
+                    }
                 }
             }
+            if (check[sum / 2])
+                break;
         }
 
         if (check[sum / 2])
