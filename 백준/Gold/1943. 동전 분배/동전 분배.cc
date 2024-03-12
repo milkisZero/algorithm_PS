@@ -33,15 +33,13 @@ int main() {
             continue;
         }
 
+        check[0] = 1;
         for (int j = 0; j < n; j++) {
             auto [cost, cnt] = coin[j];
-            for (int i = sum / 2; i > cost; i--) {
-                if (!check[i]) {
-                    for (int k = 1; k <= cnt && cost * k < i; k++) {
-                        ll tmp = cost * k;
-                        check[tmp] = 1;
-                        if (check[i - tmp])
-                            check[i] = 1;
+            for (int i = sum / 2; i >= 0; i--) {
+                if (check[i]) {
+                    for (int k = 1; k <= cnt && i + cost * k <= sum / 2; k++) {
+                        check[i + cost * k] = 1;
                     }
                 }
             }
@@ -49,10 +47,7 @@ int main() {
                 break;
         }
 
-        if (check[sum / 2])
-            cout << 1 << '\n';
-        else
-            cout << 0 << '\n';
+        cout << check[sum / 2] << '\n';
     }
 
     return 0;
