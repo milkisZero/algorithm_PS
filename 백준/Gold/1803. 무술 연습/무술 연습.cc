@@ -11,13 +11,6 @@ using ull = unsigned long long;
 
 int arr[MAX], ind[MAX], res[MAX];
 
-void recur(int x) {
-    if (res[arr[x]] != -1)
-        return;
-    res[arr[x]] = !res[x];
-    recur(arr[x]);
-}
-
 int main() {
     fastio;
 
@@ -44,7 +37,7 @@ int main() {
         int x = pq.front();
         pq.pop();
         ind[x] = -1;
-
+ 
         if (res[arr[x]] == -1) {
             int k = arr[x];
             ind[k] = -1;
@@ -61,7 +54,7 @@ int main() {
     for (int i = 1; i <= m + n; i++) {
         if (res[i] == -1) {
             res[i] = 1;
-            recur(i);
+            res[arr[i]] = 0;
         }
     }
 
