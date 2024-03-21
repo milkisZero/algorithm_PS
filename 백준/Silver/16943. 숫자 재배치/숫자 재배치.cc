@@ -1,3 +1,4 @@
+// #백트래킹
 #include <bits/stdc++.h>
 #define INF INT_MAX
 #define LLINF LLONG_MAX
@@ -9,26 +10,6 @@ using pll = pair<ll, ll>;
 using ull = unsigned long long;
 
 string s, k;
-int res = -1;
-
-void recur(string a, int n) {
-    if (a.length() == s.length()) {
-        if (stoi(a) < stoi(k))
-            res = max(res, stoi(a));
-        else
-            return;
-    }
-
-    for (int i = 0; i < s.length(); i++) {
-        string b = "";
-        if ((n & (1 << i)) == 0) {
-            if (a == "" && s[i] == '0')
-                continue;
-            b = a + s[i];
-            recur(b, (n | (1 << i)));
-        }
-    }
-}
 
 int main() {
     fastio;
@@ -45,7 +26,13 @@ int main() {
         return 0;
     }
 
-    recur("", 0);
+    sort(s.begin(), s.end());
+
+    int res = -1;
+    do {
+        if (stoi(s) < stoi(k) && s[0] != '0')
+            res = max(res, stoi(s));
+    } while (next_permutation(s.begin(), s.end()));
 
     cout << res;
 
