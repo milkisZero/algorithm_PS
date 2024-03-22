@@ -9,7 +9,7 @@ using pll = pair<ll, ll>;
 using ull = unsigned long long;
 
 ll arr[45];
-map<ll, ll> sum;
+unordered_map<ll, ll> sum;
 ll n, k, res;
 
 void left_recur(ll idx, ll val) {
