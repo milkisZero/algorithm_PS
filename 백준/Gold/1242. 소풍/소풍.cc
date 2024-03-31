@@ -15,19 +15,15 @@ int main() {
     cin >> n >> k >> m;
 
     ll res = 0;
-    while (n) {
+    while (n && m) {
         res++;
         m -= k;
         if (m < 0) {
-            if (n > k) {
+            if (n > k)
                 m = n + m;
-            }
-            else {
+            else
                 m = (n - (k % n) + m + k) % n;
-            }
         }
-        if (m == 0)
-            break;
         n--;
     }
 
