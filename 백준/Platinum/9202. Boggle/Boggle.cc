@@ -1,3 +1,5 @@
+// #dfs
+// 탐색 전 상태를 분할 저장해야 속도를 빠르게 할 수 있다
 #include <bits/stdc++.h>
 #define INF INT_MAX
 #define LLINF LLONG_MAX
@@ -8,7 +10,6 @@ using pi = pair<int, int>;
 using pll = pair<ll, ll>;
 using ull = unsigned long long;
 
-bool visi[5][5];
 vector<pi> add = {{0, 1}, {1, 0}, {-1, 0}, {0, -1}, {1, 1}, {-1, -1}, {1, -1}, {-1, 1}};
 vector<string> bog(5);
 map<string, bool> mp;
@@ -19,8 +20,8 @@ bool inmap(int a, int b) {
     return (a >= 0 && b >= 0 && a < 4 && b < 4);
 }
 
-bool dfs(int a, int b, int idx) {
-    visi[a][b] = 1;
+bool dfs(int a, int b, int idx, int visi) {
+    visi |= 1 << a * 4 + b;
     int klen = k.length();
     if (klen - 1 == idx) {
         if (ls.length() < klen) ls = k;
@@ -36,9 +37,8 @@ bool dfs(int a, int b, int idx) {
     }
 
     for (auto [x, y] : add) {
-        if (inmap(a + x, b + y) && !visi[a + x][b + y] && k[idx + 1] == bog[a + x][b + y]) {
-            if (dfs(a + x, b + y, idx + 1)) return 1;
-            visi[a + x][b + y] = 0;
+        if (inmap(a + x, b + y) && !(visi & 1 << 4 * (a + x) + b + y) && k[idx + 1] == bog[a + x][b + y]) {
+            if (dfs(a + x, b + y, idx + 1, (visi | 1 << 4 * (a + x) + b + y))) return 1;
         }
     }
     return 0;
@@ -67,8 +67,7 @@ int main() {
             check = 0;
             for (auto [x, y] : tile[e[0]]) {
                 k = e;
-                if (dfs(x, y, 0)) check = 1;
-                memset(visi, 0, sizeof(visi));
+                if (dfs(x, y, 0, 0)) check = 1;
                 if (check) break;
             }
         }
