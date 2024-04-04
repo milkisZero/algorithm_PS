@@ -21,6 +21,7 @@ void dfs(ll a, ll b, ll cnt, int bit) {
     res = max(res, cnt);
     visited[a][b] = 1;
     bit |= 1 << s[a][b] - 'A';
+    if (bit == (1 << 27) - 1) return;
     for (auto [x1, x2] : add) {
         if (inmap(a + x1, b + x2) && !(bit & (1 << s[a + x1][b + x2] - 'A')) && !visited[a + x1][b + x2]) {
             dfs(a + x1, b + x2, cnt + 1, bit);
