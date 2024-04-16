@@ -18,6 +18,7 @@ int main() {
     for (int i = 0; i < n; i++) {
         cin >> a;
         sum += (b * (int)(a - 'a' + 1)) % m;
+        sum %= m;
         b *= r;
         b %= m;
     }
