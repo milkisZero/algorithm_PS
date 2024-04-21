@@ -19,13 +19,12 @@ int main() {
     fill(d, d + MAX - 1, INF);
 
     priority_queue<pi> pq;
-    d[n] = 0, d[k] = abs(n - k);
+    d[n] = 0;
     pq.push({0, n});
     while (!pq.empty()) {
         auto [t, x] = pq.top();
         t = -t;
         pq.pop();
-        if (d[k] <= t) continue;
         if (t == d[x]) {
             if (t + 1 <= d[k]) {
                 if (x + 1 < MAX && d[x + 1] > t + 1) {
