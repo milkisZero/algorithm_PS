@@ -11,14 +11,15 @@ using ull = unsigned long long;
 ll arr[100005];
 ll n, p, q, r, S;
 
-ll calc(ll k) {
+bool calc(ll k) {
     ll sum = 0;
     for (int i = 0; i < n; i++) {
         sum += arr[i];
         if (arr[i] > k + r) sum -= p;
         else if (arr[i] < k) sum += q;
     }
-    return sum;
+    if (sum < S) return 0;
+    return 1;
 }
 
 int main() {
@@ -27,15 +28,17 @@ int main() {
     for (int i = 0; i < n; i++) cin >> arr[i];
     cin >> p >> q >> r >> S;
 
-    ll L = 1, R = 110000, M;
-    while (L < R) {
+    ll L = 1, R = 100001, M, res = -1;
+    while (L <= R) {
         M = (L + R) / 2;
-        if (calc(M) >= S) R = M;
+        if (calc(M)) {
+            res = M;
+            R = M - 1;
+        }
         else L = M + 1;
     }
 
-    if (R == 110000) cout << -1;
-    else cout << R;
+    cout << res;
 
     return 0;
 }
