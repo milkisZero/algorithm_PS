@@ -1,3 +1,4 @@
+// #세그
 #include <bits/stdc++.h>
 #define INF INT_MAX
 #define LLINF LLONG_MAX
@@ -9,7 +10,17 @@ using pll = pair<ll, ll>;
 using ull = unsigned long long;
 #define MAX (int)1e6
 
-ll sg[MAX * 4];
+ll sg[MAX * 4], arr[MAX];
+
+void init(ll n, ll s, ll e) {
+    if (s == e) {
+        sg[n] = arr[s];
+        return;
+    }
+    ll m = (s + e) / 2;
+    init(2 * n, s, m), init(2 * n + 1, m + 1, e);
+    sg[n] = sg[2 * n] + sg[2 * n + 1];
+}
 
 void upd(ll n, ll l, ll r, ll t, ll val) {
     if (t < l || r < t) return;
@@ -33,7 +44,8 @@ int main() {
     fastio;
     ll n, a, sum = 0;
     cin >> n;
-    for (int i = 1; i <= n; i++) upd(1, 1, n, i, 1);
+    for (int i = 1; i <= n; i++) arr[i] = 1;
+    init(1, 1, n);
 
     for (int i = 1; i <= n; i++) {
         cin >> a;
