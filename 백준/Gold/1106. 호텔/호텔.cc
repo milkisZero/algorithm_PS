@@ -7,9 +7,8 @@ using ll = long long;
 using pi = pair<int, int>;
 using pll = pair<ll, ll>;
 using ull = unsigned long long;
-#define MAX 2000
 
-ll dp[2004];
+ll dp[2003];
 
 int main() {
     fastio;
@@ -19,18 +18,18 @@ int main() {
     vector<pll> v(n);
     for (auto &[f, s] : v) cin >> f >> s;
 
-    fill(dp, dp + MAX + 1, INF);
+    fill(dp, dp + c + 101, INF);
 
     dp[0] = 0;
-    for (int i = 0; i <= MAX; i++) {
+    for (int i = 0; i <= 100 + c; i++) {
         for (int j = 0; j < n; j++) {
             auto [f, s] = v[j];
-            if (i + s <= MAX) dp[i + s] = min(dp[i + s], dp[i] + f);
+            if (i + s <= 100 + c) dp[i + s] = min(dp[i + s], dp[i] + f);
         }
     }
 
     ll res = LLINF;
-    for (int i = c; i <= MAX; i++) {
+    for (int i = c; i <= 100 + c; i++) {
         res = min(res, dp[i]);
     }
     cout << res;
