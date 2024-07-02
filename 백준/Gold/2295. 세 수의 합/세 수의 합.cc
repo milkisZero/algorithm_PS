@@ -10,20 +10,6 @@ using ull = unsigned long long;
 
 vector<int> v2;
 
-bool bs(int k) {
-    int l = 0, r = v2.size() - 1, m;
-    while (l <= r) {
-        m = (l + r) / 2;
-
-        if (k == v2[m]) return 1;
-
-        if (k > v2[m]) l = m + 1;
-        else r = m - 1;
-    }
-
-    return 0;
-}
-
 int main() {
     fastio;
 
@@ -45,7 +31,7 @@ int main() {
         for (int j = 0; j < n; j++) {
             ll k = v[i] - v[j];
 
-            if (bs(k)) {
+            if (binary_search(v2.begin(), v2.end(), k)) {
                 cout << v[i];
                 return 0;
             }
