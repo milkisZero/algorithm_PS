@@ -42,12 +42,16 @@ int main() {
     v2.erase(unique(v2.begin(), v2.end()), v2.end());
 
     ll res = 0;
-    for (int i = 0; i < n; i++) {
+    for (int i = n - 1; i >= 0; i--) {
         for (int j = 0; j < n; j++) {
             ll k = v[i] - v[j];
 
-            if (bs(k)) res = max(res, max(v[i], v[j]));
+            if (bs(k)) {
+                res = v[i];
+                break;
+            }
         }
+        if (res) break;
     }
 
     cout << res;
