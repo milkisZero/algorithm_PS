@@ -9,7 +9,6 @@ using pll = pair<ll, ll>;
 using ull = unsigned long long;
 
 vector<ll> v, v2;
-map<ll, bool> mp;
 
 bool bs(ll k) {
     ll l = 0, r = v2.size() - 1, m;
@@ -31,10 +30,7 @@ int main() {
     ll n;
     cin >> n;
     v.resize(n);
-    for (auto &e : v) {
-        cin >> e;
-        mp[e] = 1;
-    }
+    for (auto &e : v) cin >> e;
     sort(v.begin(), v.end());
 
     for (int i = 0; i < n; i++) {
