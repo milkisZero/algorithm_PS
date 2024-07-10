@@ -17,18 +17,14 @@ int main() {
     vector<ll> v(n);
     for (auto &e : v) cin >> e;
 
-    ll cnt = 0;
+    ll cnt = 0, prev = 0;
     for (int i = 1; i < n; i++) {
-        if (v[i - 1] > v[i]) {
 
-            ll a = 0;
-            while (v[i - 1] > v[i] * pow(2, a)) {
-                a++;
-            }
+        ll a = ceil(log2((double)v[i - 1] / v[i]) + prev);
+        a = max(a, 0ll);
 
-            v[i] *= pow(2, a);
-            cnt += a;
-        }
+        cnt += a;
+        prev = a;
     }
 
     cout << cnt;
