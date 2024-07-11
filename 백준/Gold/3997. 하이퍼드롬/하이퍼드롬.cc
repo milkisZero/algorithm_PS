@@ -10,7 +10,7 @@ using ull = unsigned long long;
 
 ll acnt[300005];
 
-map<ll, ll> mp1, mp2;
+unordered_map<ll, ll> mp1, mp2;
 
 int main() {
     fastio;
