@@ -1,4 +1,3 @@
-// #dp
 #include <bits/stdc++.h>
 #define INF INT_MAX
 #define LLINF LLONG_MAX
@@ -32,23 +31,20 @@ int main() {
 
                 if (arr[i] >= t) {
                     dp[i][q][0] = max(dp[i][q][0], dp[i - 1][q][l] + 1);
-                    continue;
                 }
-
-                for (int p = l; q + (p - l) <= k; p++) {
-                    ll val = arr[i] + p >= t ? 1 : 0;
-                    dp[i][q + (p - l)][p] = max(dp[i][q + (p - l)][p], dp[i - 1][q][l] + val);
+                else {
+                    dp[i][q][l] = max(dp[i - 1][q - l][0], dp[i - 1][q][l]);
+                    dp[i][q][l] += (arr[i] + l >= t);
                 }
             }
         }
     }
 
     ll res = 0;
-    for (int i = 0; i <= k; i++) {
-        for (int j = 0; j <= i; j++) {
-            res = max(res, dp[n][i][j]);
-        }
+    for (int j = 0; j <= k; j++) {
+        res = max(res, dp[n][k][j]);
     }
+
     cout << res;
 
     return 0;
