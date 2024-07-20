@@ -45,7 +45,7 @@ int main() {
 
     ll res = 0;
     for (int i = 0; i <= k; i++) {
-        for (int j = 0; j <= k; j++) {
+        for (int j = 0; j <= i; j++) {
             res = max(res, dp[n][i][j]);
         }
     }
