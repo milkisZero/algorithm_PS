@@ -9,54 +9,29 @@ using pll = pair<ll, ll>;
 using ull = unsigned long long;
 #define MOD 1000000007
 
-using matrix = vector<vector<ll>>;
-ll k, n;
-
-matrix operator*(const matrix &a, const matrix &b) {
-    matrix ret(k + 2, vector<ll>(k + 2));
-
-    for (int i = 0; i < k + 2; i++) {
-        for (int j = 0; j < k + 2; j++) {
-            ll tmp = 0;
-            for (int l = 0; l < k + 2; l++) {
-                tmp += (a[i][l] * b[l][j]) % MOD;
-                tmp %= MOD;
-            }
-            ret[i][j] = tmp;
-        }
-    }
-    return ret;
-}
-
 int main() {
     fastio;
 
+    ll k, n;
     cin >> k >> n;
 
-    matrix A(k + 2, vector<ll>(k + 2));
-    matrix res(k + 2, vector<ll>(k + 2));
+    ll fact = 1;
+    for (int i = n; i <= n + k; i++)
+        fact = (fact * i) % MOD;
 
-    for (int i = 0; i < k + 2; i++) {
-        for (int j = 0; j <= i; j++) {
-            A[i][j] = 1;
-        }
+    ll inv = 1;
+    for (int i = 1; i <= k + 1; i++)
+        inv = (inv * i) % MOD;
+
+    ll powN = MOD - 2;
+    while (powN) {
+        if (powN % 2)
+            fact = (fact * inv) % MOD;
+        powN /= 2;
+        inv = (inv * inv) % MOD;
     }
 
-    for (int i = 0; i < k + 2; i++) res[i][i] = 1;
-
-    n--;
-    while (n) {
-        if (n % 2) res = res * A;
-        n /= 2;
-        A = A * A;
-    }
-
-    ll sum = 0;
-    for (auto e : res[k + 1]) {
-        sum += e;
-        sum %= MOD;
-    }
-    cout << sum;
+    cout << fact;
 
     return 0;
 }
