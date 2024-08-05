@@ -15,7 +15,7 @@ int main() {
     cin >> a >> b;
     if (a > b) swap(a, b);
 
-    map<ll, bool> mp;
+    unordered_map<ll, bool> mp;
     for (ll i = 2; i <= sqrt(b); i++) {
         for (ll j = a / (i * i); j * i * i <= b; j++) {
             mp[j * i * i] = 1;
