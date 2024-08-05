@@ -18,7 +18,7 @@ int main() {
 
         for (int i = 0; i < 10; i++) {
             if (i == tmp) {
-                cnt[i] += n - (round(pow(10, j + 1)) * k + tmp * round(pow(10, j))) + 1;
+                cnt[i] += n % (int)round(pow(10, j)) + 1;
                 if (tmp == 0)
                     cnt[i] += round(pow(10, j)) * (k - 1);
                 else
