@@ -8,8 +8,11 @@ using pi = pair<int, int>;
 using pll = pair<ll, ll>;
 using ull = unsigned long long;
 
-ll ucnt[11];
-ll lcnt[11];
+ll ucnt[11], lcnt[11];
+
+ll pow_t(double n) {
+    return round(pow(10, n));
+}
 
 void func(ll n, ll cnt[]) {
     int k = n;
@@ -19,15 +22,13 @@ void func(ll n, ll cnt[]) {
 
         for (int i = 0; i < 10; i++) {
             if (i == tmp) {
-                cnt[i] += n - (round(pow(10, j + 1)) * k + tmp * round(pow(10, j))) + 1;
-                cnt[i] += round(pow(10, j)) * k;
+                cnt[i] += n % pow_t(j) + 1;
+
+                if (tmp == 0) cnt[i] += pow_t(j) * (k - 1);
+                else cnt[i] += pow_t(j) * k;
             }
-            else if (tmp < i || i == 0 || tmp == 0) {
-                cnt[i] += round(pow(10, j)) * k;
-            }
-            else if (i > 0 && i < tmp) {
-                cnt[i] += round(pow(10, j)) * (k + 1);
-            }
+            else if (tmp < i || i == 0) cnt[i] += pow_t(j) * k;
+            else if (i < tmp) cnt[i] += pow_t(j) * (k + 1);
         }
     }
 }
