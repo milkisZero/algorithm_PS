@@ -20,10 +20,7 @@ void func(ll n, ll cnt[]) {
         for (int i = 0; i < 10; i++) {
             if (i == tmp) {
                 cnt[i] += n - (round(pow(10, j + 1)) * k + tmp * round(pow(10, j))) + 1;
-                if (tmp == 0)
-                    cnt[i] += round(pow(10, j)) * (k - 1);
-                else
-                    cnt[i] += round(pow(10, j)) * k;
+                cnt[i] += round(pow(10, j)) * k;
             }
             else if (tmp < i || i == 0 || tmp == 0) {
                 cnt[i] += round(pow(10, j)) * k;
