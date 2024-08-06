@@ -7,22 +7,45 @@ using ll = long long;
 using pi = pair<int, int>;
 using pll = pair<ll, ll>;
 using ull = unsigned long long;
-#include <ext/pb_ds/assoc_container.hpp>
-#include <ext/pb_ds/tree_policy.hpp>
-using namespace __gnu_pbds;
-using ordered_set = tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update>;
+
+ll arr[500005];
+ll n;
+
+ll sum(ll i) {
+    ll ans = 0;
+    while (i > 0) {
+        ans += arr[i];
+        i -= (i & -i);
+    }
+    return ans;
+}
+
+void update(ll i, ll num) {
+    while (i <= n) {
+        arr[i] += num;
+        i += (i & -i);
+    }
+}
 
 int main() {
     fastio;
 
-    ll n, e;
     cin >> n;
+    vector<pll> v(n);
+    for (int i = 0; i < n; i++) {
+        cin >> v[i].first;
+        v[i].second = i;
+    }
 
-    ordered_set OS;
-    for (int i = 1; i <= n; i++) {
-        cin >> e;
-        OS.insert(e);
-        cout << i - OS.order_of_key(e) << '\n';
+    sort(v.begin(), v.end());
+    for (int i = 0; i < n; i++) {
+        v[i].first = i + 1;
+    }
+    sort(v.begin(), v.end(), [&](pll a, pll b) { return a.second < b.second; });
+
+    for (int i = 0; i < n; i++) {
+        cout << (i + 1) - sum(v[i].first - 1) << '\n';
+        update(v[i].first, 1);
     }
 
     return 0;
