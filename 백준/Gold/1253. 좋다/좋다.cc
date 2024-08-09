@@ -18,18 +18,18 @@ int main() {
 
     sort(v.begin(), v.end());
 
-    set<ll> st;
+    ll cnt = 0;
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
             ll k = lower_bound(v.begin(), v.end(), v[i] - v[j]) - v.begin();
             while (k == i || k == j) k++;
             if (v[j] + v[k] == v[i] && j != k && j != i && i != k) {
-                st.insert(i);
+                cnt++;
                 break;
             }
         }
     }
 
-    cout << st.size();
+    cout << cnt;
     return 0;
 }
