@@ -16,10 +16,15 @@ ll init(ll n, ll l, ll r) {
     return seg[n] = init(2 * n, l, (l + r) / 2) + init(2 * n + 1, (l + r) / 2 + 1, r);
 }
 
-ll upd(ll n, ll l, ll r, ll t, ll v) {
-    if (t < l || r < t) return seg[n];
-    if (l == r) return seg[n] += v;
-    return seg[n] = upd(2 * n, l, (l + r) / 2, t, v) + upd(2 * n + 1, (l + r) / 2 + 1, r, t, v);
+void upd(ll n, ll l, ll r, ll t, ll val) {
+    if (t < l || r < t) return;
+    else if (l == r) {
+        seg[n] += val;
+        return;
+    }
+    ll m = (l + r) / 2;
+    upd(2 * n, l, m, t, val), upd(2 * n + 1, m + 1, r, t, val);
+    seg[n] = seg[2 * n] + seg[2 * n + 1];
 }
 
 ll qry(ll n, ll l, ll r, ll ql, ll qr) {
@@ -38,8 +43,9 @@ int main() {
         ll n, m;
         cin >> n >> m;
 
+        ll maxi = n + m;
         for (int i = 1; i <= n; i++) arr[i] = 1;
-        init(1, 1, MAX);
+        init(1, 1, maxi);
 
         for (int i = 1; i <= n; i++) arr[i] = n - i + 1;
 
@@ -48,10 +54,10 @@ int main() {
             ll tmp;
             cin >> tmp;
 
-            cout << qry(1, 1, MAX, arr[tmp] + 1, MAX) << ' ';
-            upd(1, 1, MAX, arr[tmp], -1);
+            cout << qry(1, 1, maxi, arr[tmp] + 1, maxi) << ' ';
+            upd(1, 1, maxi, arr[tmp], -1);
             arr[tmp] = top++;
-            upd(1, 1, MAX, arr[tmp], 1);
+            upd(1, 1, maxi, arr[tmp], 1);
         }
         cout << '\n';
 
