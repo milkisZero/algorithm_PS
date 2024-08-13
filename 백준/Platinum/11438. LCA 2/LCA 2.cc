@@ -14,7 +14,7 @@ ll parent[100005][20];
 
 void dfs(ll cur) {
     for (auto e : v[cur]) {
-        if (depth[e] == -1) {
+        if (e != 1 && !depth[e]) {
             depth[e] = depth[cur] + 1;
             parent[e][0] = cur;
             dfs(e);
@@ -35,8 +35,6 @@ int main() {
     }
 
     memset(parent, -1, sizeof(parent));
-    memset(depth, -1, sizeof(depth));
-    depth[1] = 0;
     dfs(1);
 
     for (int j = 1; j < 20; j++) {
