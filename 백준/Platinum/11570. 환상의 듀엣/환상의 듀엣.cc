@@ -28,17 +28,14 @@ int main() {
             ll a = abs(v[i - 1] - v[i]);
             ll b = !j ? 0 : abs(v[j] - v[i]);
 
-            dp[i][j] = min(dp[i][j], dp[i - 1][j] + a);
-            dp[i][i - 1] = min(dp[i][i - 1], dp[j][i - 1] + b);
-
-            dp[j][i] = min(dp[j][i], dp[j][i - 1] + a);
-            dp[i - 1][i] = min(dp[i - 1][i], dp[i - 1][j] + b);
+            dp[j][i] = dp[i][j] = min(dp[i][j], dp[i - 1][j] + a);
+            dp[i - 1][i] = dp[i][i - 1] = min(dp[i][i - 1], dp[j][i - 1] + b);
         }
     }
 
     ll res = LLINF;
     for (int i = 0; i < n; i++) {
-        res = min(res, min(dp[n][i], dp[i][n]));
+        res = min(res, dp[i][n]);
     }
     cout << res;
 
