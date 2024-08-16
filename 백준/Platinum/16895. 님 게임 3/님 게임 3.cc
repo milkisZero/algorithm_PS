@@ -25,14 +25,7 @@ int main() {
     else {
         ll res = 0;
         for (int i = 0; i < n; i++) {
-            ll tmp2 = 0;
-            for (int j = 0; j < n; j++) {
-                if (i == j) continue;
-                tmp2 ^= v[j];
-            }
-            for (int j = 0; j <= v[i]; j++) {
-                if ((tmp2 ^ j) == 0) res++;
-            }
+            if ((tmp ^ v[i]) <= v[i]) res++;
         }
 
         cout << res;
