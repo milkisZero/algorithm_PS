@@ -71,27 +71,27 @@ int main() {
     for (int i = q; i >= 1; i--) {
         if (r1 == i) {
             vec.push_back(1);
-            for (int j = i - 1; j >= 1; j--) {
+            ll tmp = 0;
+            for (int j = 1; j < i; j++) {
                 if (r2 == j) continue;
                 ll dist = abs(v[i].first - v[j].first) + abs(v[i].second - v[j].second);
                 if (dp[r1][r2] == dp[j][r2] + dist) {
-                    r1 = j;
-                    break;
+                    tmp = j;
                 }
             }
-            if (r1 == i) r1 = 0;
+            r1 = tmp;
         }
-        else if (r2 == i) {
+        else {
             vec.push_back(2);
-            for (int j = i - 1; j >= 1; j--) {
+            ll tmp = 0;
+            for (int j = 1; j < i; j++) {
                 if (r1 == j) continue;
                 ll dist = abs(v[i].first - v[j].first) + abs(v[i].second - v[j].second);
                 if (dp[r1][r2] == dp[r1][j] + dist) {
-                    r2 = j;
-                    break;
+                    tmp = j;
                 }
             }
-            if (r2 == i) r2 = 0;
+            r2 = tmp;
         }
     }
 
