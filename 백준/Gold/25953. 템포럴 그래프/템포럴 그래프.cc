@@ -16,7 +16,7 @@ int main() {
     ll s, e;
     cin >> s >> e;
 
-    fill(&dp[0][0], &dp[1004][10004], 1000000007);
+    fill(&dp[0][0], &dp[1004][10004], INT_MAX);
 
     vector<array<ll, 3>> g[t + 5];
     for (int i = 1; i <= t; i++) {
@@ -39,7 +39,7 @@ int main() {
     }
 
     ll ans = dp[t][e];
-    if (ans == 1000000007) cout << -1;
+    if (ans == INT_MAX) cout << -1;
     else cout << ans;
 
     return 0;
