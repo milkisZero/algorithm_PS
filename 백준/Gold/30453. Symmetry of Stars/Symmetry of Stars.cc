@@ -23,6 +23,8 @@ int main() {
     }
 
     map<pll, ll> mp;
+    ll maxi = 0;
+
     for (int i = 0; i < n; i++) {
         auto [a1, a2] = v[i];
         for (int j = i; j < n; j++) {
@@ -30,14 +32,10 @@ int main() {
             if (i == j) k = 1;
 
             auto [b1, b2] = v[j];
-            mp[{(a1 + b1), (a2 + b2)}] += k;
+            maxi = max(maxi, mp[{(a1 + b1), (a2 + b2)}] += k);
         }
     }
 
-    ll maxi = 0;
-    for (auto [p, v] : mp) {
-        maxi = max(maxi, v);
-    }
     cout << maxi;
 
     return 0;
