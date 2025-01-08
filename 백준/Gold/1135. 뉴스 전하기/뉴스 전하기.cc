@@ -1,3 +1,4 @@
+// #트리dp #dfs #dp
 #include <bits/stdc++.h>
 #define INF INT_MAX
 #define LLINF LLONG_MAX
@@ -17,17 +18,15 @@ ll cnt[55];
 ll dfs(ll cur) {
     visited[cur] = 1;
 
-    ll tmp = 0;
     for (auto e : v[cur]) {
-        if (!visited[e]) tmp += dfs(e);
+        if (!visited[e]) dfs(e);
     }
 
     sort(v[cur].begin(), v[cur].end(), [](ll a, ll b) { return cnt[a] > cnt[b]; });
 
     ll k = 0, sum = 0;
     for (auto e : v[cur]) {
-        sum = max(sum, k + cnt[e]);
-        k++;
+        sum = max(sum, k++ + cnt[e]);
     }
 
     return cnt[cur] = sum + 1;
