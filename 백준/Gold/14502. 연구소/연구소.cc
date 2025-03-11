@@ -70,10 +70,10 @@ void bf(ll a, ll b, ll cnt) {
     }
 
     for (int i = a; i < n; i++) {
-        for (int j = b; j < m; j++) {
+        for (int j = i == a ? b : 0; j < m; j++) {
             if (v[i][j] == 0) {
                 v[i][j] = 1;
-                bf(i, 0, cnt + 1);
+                bf(i, j, cnt + 1);
                 v[i][j] = 0;
             }
         }
