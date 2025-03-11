@@ -15,7 +15,7 @@ vector<ll> v[9], v2[9];
 ll visited[9][9];
 pll mov[4] = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
 
-bool inmap(ll a, ll b) {
+ll inmap(ll a, ll b) {
     if (a < 0 || b < 0 || a >= n || b >= m) return 0;
     return 1;
 }
@@ -63,17 +63,17 @@ void check() {
     res = max(res, cnt);
 }
 
-void bf(ll cnt) {
+void bf(ll a, ll b, ll cnt) {
     if (cnt == 3) {
         check();
         return;
     }
 
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < m; j++) {
+    for (int i = a; i < n; i++) {
+        for (int j = b; j < m; j++) {
             if (v[i][j] == 0) {
                 v[i][j] = 1;
-                bf(cnt + 1);
+                bf(i, 0, cnt + 1);
                 v[i][j] = 0;
             }
         }
@@ -92,7 +92,7 @@ int main() {
         }
     }
 
-    bf(0);
+    bf(0, 0, 0);
 
     cout << res;
 
