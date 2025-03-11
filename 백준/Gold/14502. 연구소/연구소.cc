@@ -15,9 +15,8 @@ vector<ll> v[9], v2[9];
 ll visited[9][9];
 pll mov[4] = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
 
-ll inmap(ll a, ll b) {
-    if (a < 0 || b < 0 || a >= n || b >= m) return 0;
-    return 1;
+bool inmap(ll a, ll b) {
+    return (a < 0 || b < 0 || a >= n || b >= m) ? 0 : 1;
 }
 
 void bfs(ll a, ll b) {
