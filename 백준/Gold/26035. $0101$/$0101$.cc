@@ -11,8 +11,8 @@ using pll = pair<ll, ll>;
 using ull = unsigned long long;
 #define MOD ((ll)1e9 + 7)
 
-ull powN(ull a, ll b) {
-    ull res = 1;
+ll powN(ll a, ll b) {
+    ll res = 1;
     while (b) {
         if (b % 2) res = (res * a) % MOD;
         a = (a * a) % MOD;
@@ -24,7 +24,7 @@ ull powN(ull a, ll b) {
 int main() {
     fastio;
 
-    ull n, m;
+    ll n, m;
     cin >> n >> m;
 
     cout << (powN(2, n) + powN(2, m) - 2) % MOD;
