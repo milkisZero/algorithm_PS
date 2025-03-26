@@ -16,13 +16,12 @@ int main() {
     ll n, M, L;
     cin >> n >> M >> L;
     L--;
-
     vector<ll> v(n);
     for (int i = 0; i < n; i++) cin >> v[i];
     sort(v.begin(), v.end());
 
     ll res = LLINF;
-    ll l = 1, r = L, m;
+    ll l = 1, r = L - 1, m;
     while (l <= r) {
         m = (l + r) / 2;
 
@@ -50,7 +49,7 @@ int main() {
         }
         maxi = max(maxi, L - prev);
 
-        if (maxi == m && cnt <= M) res = min(res, maxi);
+        if (cnt <= M) res = min(res, maxi);
 
         if (cnt > M) l = m + 1;
         else r = m - 1;
